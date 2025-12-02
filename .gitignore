@@ -1,0 +1,21 @@
+# Node
+node_modules/
+dist/
+.env
+npm-debug.log
+
+# Logs
+*.log
+
+# Build
+build/
+.cache/
+
+# Python (agar backend python me ho)
+__pycache__/
+venv/
+*.pyc
+
+# OS files
+.DS_Store
+Thumbs.db
