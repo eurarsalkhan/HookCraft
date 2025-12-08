@@ -8,7 +8,7 @@ export default function Terms() {
           Terms & Conditions
         </h1>
         <p className="text-gray-700 leading-relaxed mb-6">
-          Welcome to <span className="font-semibold">[Your App Name]</span>.
+          Welcome to <span className="font-semibold">HookCraft</span>.
           By accessing or using our platform, you agree to follow the terms and
           conditions outlined below. Please read them carefully before using the
           service.

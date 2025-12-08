@@ -73,8 +73,8 @@ export default function GeneratorDashboard() {
     };
 
   const [form, setForm] = useState({
-    niche: "",
-    topic: "",
+    niche: "Story Line/ Fitness/ Tech AI, etc.",
+    topic: "Rule Based Story/ AI Tool Promotion, etc.",
     tone: savedSettings.tone,
     audience: "",
     hookType: "Question",
@@ -113,31 +113,63 @@ export default function GeneratorDashboard() {
     setForm((p) => ({ ...p, ...preset.form }));
   };
 
+  // const generate = async () => {
+  //   setErr("");
+  //   setHooks([]);
+  //   setLoading(true);
+  //   try {
+  //     const res = await Api.generate(form);
+  //     const items = res?.hooks || [];
+
+  //     const normalized = items.map((it) =>
+  //       typeof it === "string" ? { text: it, meta: form } : it
+  //     );
+
+  //     setHooks(normalized);
+  //     setPage(1);
+
+  //     // auto-copy
+  //     if (savedSettings.autoCopy && normalized.length > 0) {
+  //       navigator.clipboard.writeText(normalized[0].text);
+  //     }
+  //   } catch (e) {
+  //     setErr(e?.message || "Failed to generate hooks.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   const generate = async () => {
-    setErr("");
-    setHooks([]);
-    setLoading(true);
-    try {
-      const res = await Api.generate(form);
-      const items = res?.hooks || [];
+  setErr("");
+  setHooks([]);
+  setLoading(true);
 
-      const normalized = items.map((it) =>
-        typeof it === "string" ? { text: it, meta: form } : it
-      );
+  try {
+    // ✅ FIX: Convert count from string → number BEFORE sending to backend
+    const payload = {
+      ...form,
+      count: Number(form.count),
+    };
 
-      setHooks(normalized);
-      setPage(1);
+    const res = await Api.generate(payload);
+    const items = res?.hooks || [];
 
-      // auto-copy
-      if (savedSettings.autoCopy && normalized.length > 0) {
-        navigator.clipboard.writeText(normalized[0].text);
-      }
-    } catch (e) {
-      setErr(e?.message || "Failed to generate hooks.");
-    } finally {
-      setLoading(false);
+    const normalized = items.map((it) =>
+      typeof it === "string" ? { text: it, meta: payload } : it
+    );
+
+    setHooks(normalized);
+    setPage(1);
+
+    if (savedSettings.autoCopy && normalized.length > 0) {
+      navigator.clipboard.writeText(normalized[0].text);
     }
-  };
+  } catch (e) {
+    setErr(e?.message || "Failed to generate hooks.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const onCopy = async (t) => {
     try {
@@ -199,43 +231,32 @@ export default function GeneratorDashboard() {
   };
 const SAMPLE_HOOKS = [
   {
-    category: "Motivation",
+    category: "📃💪Motivation",
     list: [
-      "The moment you feel like quitting… that’s where winners are born.",
-      "99% people won’t do this… but that 1% will change their life.",
-      "Your future self is begging you not to skip today."
+       "🫵If you join a that stays totally silent... Remeber — someone in that group is destined for success. So find that group/person.🧠",
+       "🫵अगर तुम किसी ऐसे ग्रुप में प्रवेश करते हो जहाँ सभी बिल्कुल शांत रहते हैं, तो समझ लो कि उस ग्रुप में कोई ऐसा है जो सफलता लेकर पैदा हुआ है।🧠"
     ]
   },
   {
-    category: "Comedy",
+    category: "💪💀 Fitness",
     list: [
-      "I tried to wake up early… but my bed said ‘Stay, we can fix this together.’",
-      "Adulting is basically Googling ‘how to do stuff’ every 5 minutes.",
-      "Gym instructor said ‘last set’… he lied."
+      "👩 Madam, if you judge a man based on his cuteness, then you have a special quality — it's called being a ______.😎",
+      "👩 मैडम, अगर आप किसी लड़के को उसकी क्यूटनेस से जज करती हैं, तो आपके पास एक खास क्वालिटी है — उसे _______ होना कहते हैं।😎"
+      
     ]
   },
   {
-    category: "Horror",
+    category: "👻😱 Horror",
     list: [
-      "The sound stopped… and that’s when I knew I wasn’t alone.",
-      "He said ‘don’t open the door’… but it was already open.",
-      "Every night at 3:12 AM… the footsteps return."
+      "👻Every night at 3:12 AM… The footsteps return... When sound stopped… And that’s when I knew I wasn’t alone.🧟",
+      "👻हर रात 3:12 AM… कदमों की आहट फिर लौट आती है… जब वो आवाज़ अचानक रुक गई… तभी मुझे एहसास हुआ कि मैं अकेला नहीं था।🧟"
     ]
   },
-  // {
-  //   category: "Fitness",
-  //   list: [
-  //     "This 20-second habit can burn calories even while sleeping.",
-  //     "Stop doing these 3 exercises—they’re wasting your time.",
-  //     "Your abs aren’t missing… they’re hiding behind your habits."
-  //   ]
-  // },
   {
-    category: "AI Tool Promotion",
+    category: "🌐 AI Tool Promotion",
     list: [
-      "This AI tool can save creators 5 hours a day—watch this.",
-      "If you’re a creator, this tool will change everything.",
-      "The tool I wish I discovered 6 months ago—AI just got scary."
+      "🧠Before you buy any PAID AI tool, listen to this... There exist a tool whose name people prefer to keep secret.⚙️",
+      "🧠पैड AI टूल्स लेने से पहले यह बात सुन लो… एक ऐसा टूल मौजूद है जिसका नाम लोग छुपाना पसंद करते हैं। क्योंकि जिस दिन सबको पता चल गया… AI Market ही उलट जाएगा।⚙️"
     ]
   }
 ];
@@ -509,7 +530,7 @@ const SAMPLE_HOOKS = [
   )}
 
   {/* After generating hooks → show HookCards */}
-  {hooks.length > 0 && (
+  {/* {hooks.length > 0 && (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {visible.map((item, i) => (
         <HookCard
@@ -520,7 +541,32 @@ const SAMPLE_HOOKS = [
         />
       ))}
     </div>
-  )}
+  )} */}
+  {hooks.length > 0 && (
+  <motion.div
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.4 }}
+    className="grid grid-cols-1 md:grid-cols-2 gap-4"
+  >
+    {visible.map((item, i) => (
+      <motion.div
+        key={i}
+        className="p-4 border rounded-xl shadow-sm bg-white"
+        whileHover={{ scale: 1.02 }}
+      >
+<h3 className="font-semibold mb-2">Hook #{i + 1}</h3>
+
+        <ul className="text-sm text-slate-700 space-y-2">
+          <li className="p-2 bg-slate-50 rounded-md">
+            {item.text}
+          </li>
+        </ul>
+      </motion.div>
+    ))}
+  </motion.div>
+)}
+
 
   {/* Pagination */}
   {hooks.length > 0 && pages > 1 && (

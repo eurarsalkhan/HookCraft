@@ -100,12 +100,14 @@ export default function SettingsPopup({ close, save }) {
         {/* Buttons */}
         <div className="flex justify-end gap-3 mt-4">
           <button
+            type ="button"
             onClick={close}
             className="px-4 py-2 bg-slate-300 dark:bg-slate-700 rounded-md"
           >
             Cancel
           </button>
           <button
+            type= "button"
             onClick={applySettings}
             className="px-4 py-2 bg-emerald-600 text-white rounded-md"
           >

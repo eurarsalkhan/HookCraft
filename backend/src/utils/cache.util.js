@@ -14,6 +14,16 @@ export async function getCached(hash) {
   return row.output;
 }
 
+// export async function setCache(hash, output) {
+//   await query('INSERT INTO cache (input_hash, output, created_at) VALUES ($1, $2, now()) ON CONFLICT (input_hash) DO UPDATE SET output = EXCLUDED.output, created_at = EXCLUDED.created_at', [hash, output]);
+// }
 export async function setCache(hash, output) {
-  await query('INSERT INTO cache (input_hash, output, created_at) VALUES ($1, $2, now()) ON CONFLICT (input_hash) DO UPDATE SET output = EXCLUDED.output, created_at = EXCLUDED.created_at', [hash, output]);
+  await query(
+    `INSERT INTO cache (input_hash, output, created_at)
+     VALUES ($1, $2, now())
+     ON CONFLICT (input_hash)
+     DO UPDATE SET output = EXCLUDED.output, created_at = EXCLUDED.created_at`,
+    [hash, JSON.stringify(output)]
+  );
 }
+

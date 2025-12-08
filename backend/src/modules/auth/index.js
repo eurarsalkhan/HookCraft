@@ -3,11 +3,13 @@ import { createClient } from '@supabase/supabase-js';
 import { SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY } from '../../config/env.js';
 import { query } from '../../config/db.js';
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY );
+const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY );
 
 export async function getSupabaseUserByToken(token) {
   try {
     const { data, error } = await supabase.auth.getUser(token);
+    console.log('Incoming token:', token);
+
     if (error) return { error };
     return { user: data.user };
   } catch (err) {
@@ -16,15 +18,56 @@ export async function getSupabaseUserByToken(token) {
 }
 
 // Ensure user row exists in users table — called after token validated
+// export async function ensureLocalUser(user) {
+//   const id = user.id;
+//   const email = user.email || null;
+//   // upsert pattern
+//   await query(
+//     `INSERT INTO users (id, email) VALUES ($1, $2)
+//      ON CONFLICT (id) DO UPDATE SET email = EXCLUDED.email`,
+//     [id, email]
+//   );
+//   const { rows } = await query('SELECT id, email, credits, plan FROM users WHERE id=$1', [id]);
+//   return rows[0];
+// }
+// export async function ensureLocalUser(user) {
+//   const id = user.id;
+//   const email = user.email || null;
+
+//   // Upsert pattern
+//   await query(
+//     `INSERT INTO users (id, email) VALUES ($1, $2)
+//      ON CONFLICT (id) DO UPDATE SET email = EXCLUDED.email`,
+//     [id, email]
+//   );
+
+//   const { rows } = await query(
+//     'SELECT id, email, credits, plan FROM users WHERE id=$1',
+//     [id]
+//   );
+
+//   return rows[0];
 export async function ensureLocalUser(user) {
   const id = user.id;
   const email = user.email || null;
-  // upsert pattern
+
+  // Insert user ONLY first time → give 20 credits + free plan
   await query(
-    `INSERT INTO users (id, email) VALUES ($1, $2)
-     ON CONFLICT (id) DO UPDATE SET email = EXCLUDED.email`,
+    `INSERT INTO users (id, email, credits, plan)
+     VALUES ($1, $2, 20, 'free')
+     ON CONFLICT (id) DO UPDATE
+     SET email = EXCLUDED.email`,
     [id, email]
   );
-  const { rows } = await query('SELECT id, email, credits, plan FROM users WHERE id=$1', [id]);
+
+  // Fetch final user data
+  const { rows } = await query(
+    `SELECT id, email, credits, plan
+     FROM users
+     WHERE id=$1`,
+    [id]
+  );
+
   return rows[0];
 }
+

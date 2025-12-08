@@ -133,7 +133,7 @@ export default function DevLandingPage() {
               Get started — it's free
             </Link>
 
-            <Link to="/sample" className="inline-flex items-center gap-2 text-sm text-slate-500 px-3 py-2 rounded-lg">
+            <Link to="/sample" className="inline-flex items-center gap-2 text-sm text-slate-500 px-3 py-2 rounded-lg hover:text-black">
               <Code size={14} /> Preview templates
             </Link>
           </motion.div>
@@ -175,8 +175,8 @@ export default function DevLandingPage() {
             </div>
 
             <div className="mt-4 space-y-3">
-              <div className="rounded-md border p-3 text-sm bg-blue-950">"Stop scrolling — this simple trick doubled my conversions in a week."</div>
-              <div className="rounded-md border p-3 text-sm bg-blue-950">"I couldn’t believe this one change boosted watch time 2×."</div>
+              <div className="rounded-md border p-3 text-sm bg-blue-950">How to Stop Scrolling: "Hey, Congrats! Today I’ll tell you about a new earning source—but keep these four things in your mind."</div>
+              <div className="rounded-md border p-3 text-sm bg-blue-950">"You won’t believe it, this will boost your watch time by 2x. So make sure to use HookCraft before you leave."</div>
             </div>
 
             <div className="mt-4 flex items-center justify-between">
@@ -230,8 +230,8 @@ export default function DevLandingPage() {
         <motion.h3 initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-2xl font-semibold">Loved by creators & product teams</motion.h3>
         <div className="mt-6 grid gap-6 md:grid-cols-3">
           <Testimonial quote="HookCraft cut our brainstorming time by half. The hooks convert." name="Sana R., Content Lead" />
-          <Testimonial quote="A reliable way to A/B ideas quickly — shipped 3 shorts last week." name="Dev Team @Orbit" />
-          <Testimonial quote="The export tools let us integrate with our CMS in minutes." name="Milan K., Growth" />
+          <Testimonial quote="A reliable way to Compare ideas quickly — shipped 3 shorts last week." name="Dev Team @HookCraft" />
+          <Testimonial quote="The export tools let us integrate with our CMS in minutes." name="Arsal K., Growth" />
         </div>
       </section>
 
@@ -240,7 +240,7 @@ export default function DevLandingPage() {
       {/* FOOTER */}
       <footer className="max-w-6xl mx-auto px-6 py-10 text-sm text-slate-100">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="hover:text-slate-900">© {new Date().getFullYear()} HookCraft — Built for creators & devs</div>
+          <div className="hover:text-slate-900">© {new Date().getFullYear()} HookCraft — Built for creators</div>
           <div className="flex gap-4">
             <Link to="/privacy" className="hover:text-slate-900">Privacy</Link>
             <Link to="/terms" className="hover:text-slate-900">Terms</Link>

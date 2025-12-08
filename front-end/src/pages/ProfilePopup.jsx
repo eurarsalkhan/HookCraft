@@ -13,23 +13,36 @@ export default function ProfilePopup({ close }) {
     loadProfile();
   }, []);
 
-  async function loadProfile() {
-    const { data: auth } = await supabase.auth.getUser();
-    const user = auth?.user;
-    if (!user) return;
+ async function loadProfile() {
+  try {
+    // 1. Get supabase session token
+    const { data: session } = await supabase.auth.getSession();
+    const token = session?.session?.access_token;
 
-    const { data: profile } = await supabase
-      .from("users")
-      .select("*")
-      .eq("id", user.id)
-      .single();
-      
+    if (!token) return;
 
-    setMe({
-      email: user.email,
-      ...profile,
+    // 2. Call backend profile route
+    const res = await fetch(`${import.meta.env.VITE_API}/users/me`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
+
+    if (!res.ok) {
+      console.error("Backend error:", res.status);
+      return;
+    }
+
+    const meData = await res.json();
+
+    // 3. Update state
+    setMe(meData);
+  } catch (err) {
+    console.error("loadProfile error:", err);
   }
+}
+
+
 
   // Close popup on outside click
   useEffect(() => {
@@ -82,7 +95,7 @@ export default function ProfilePopup({ close }) {
 
         {/* Avatar */}
         <div className="w-16 h-16 mx-auto rounded-full bg-[#0a1a33] text-white flex items-center justify-center text-2xl font-bold">
-          {me.email.charAt(0).toUpperCase()}
+        {me?.email?.charAt(0)?.toUpperCase() || "U"}
         </div>
 
         {/* Info */}
@@ -95,11 +108,11 @@ export default function ProfilePopup({ close }) {
         <div className="mt-4 bg-gray-100 p-3 rounded-lg text-black">
           <div className="flex justify-between">
             <span>Plan:</span>
-            <strong>{me.plan || " "}</strong>
+            <strong>{me?.plan ?? " "}</strong>
           </div>
           <div className="flex justify-between mt-1">
             <span>Credits:</span>
-            <strong>{me.credits || 0}</strong>
+            <strong>{me?.credits ?? 0}</strong>
           </div>
         </div>
 

@@ -16,9 +16,9 @@ export function buildPrompt({ niche, topic, tone, audience, hookType, length, co
   // if (length) lines.push(`Length: ${length}`);
   
   lines.push('You are a high-performance social media hook generator.');
-  lines.push(`Produce ${count || 4} unique, scroll-stopping hooks.`);
+  lines.push(`Produce ${count || 5} unique, scroll-stopping hooks.`);
   lines.push('Rules:');
-  lines.push('- Each hook under 12 words.');
+  lines.push('- Each hook under 19 words.');
   lines.push('- Start with a strong attention-grabber suitable for the first 2 seconds.');
   lines.push('- Use the requested tone and style.');
   lines.push('- Return each hook on its own line with no numbering.');
@@ -30,7 +30,6 @@ export function buildPrompt({ niche, topic, tone, audience, hookType, length, co
   if (audience) lines.push(`Audience: ${audience}`);
   if (hookType) lines.push(`HookType: ${hookType}`);
   if (length) lines.push(`Length: ${length}`);
-
   // new fields
   if (genre) lines.push(`Genre: ${genre}`);
   if (conflict) lines.push(`Conflict: ${conflict}`);

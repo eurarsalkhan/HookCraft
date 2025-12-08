@@ -24,7 +24,7 @@ export default function Pricing() {
           <PriceCard
             title="Starter"
             price="Free"
-            features={["20 hooks / month", "CSV export", "Basic templates"]}
+            features={["20 Credits / month", "CSV export", "Basic templates"]}
             link="/generator"
 
           />
@@ -32,7 +32,7 @@ export default function Pricing() {
             title="Pro"
             price="₹49/mo"
             highlight
-            features={["100 hooks", "Team seats", "Priority support"]}
+            features={["100 Credits", "Team seats", "Priority support"]}
             link="/billing"
           />
 
@@ -40,7 +40,7 @@ export default function Pricing() {
             title="Enterprise"
             price="Custom"
             features={["SAML SSO", "Dedicated success", "Custom integration"]}
-            link="/billing"
+            link="/generator"
           />
         </div>
       </section>
