@@ -91,7 +91,7 @@ async function request(path, { method = 'GET', body, auth = true } = {}) {
 }
 
 export const Api = {
-  generate: (payload) => request('/api/generate', { method: 'POST', body: payload }),
+  generate: (payload) => request('/generate', { method: 'POST', body: payload }),
   getMe: () => request('/users/me'),
 
   createRazorpayOrder: (payload) =>
