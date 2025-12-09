@@ -45,13 +45,13 @@ import helmet from 'helmet';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import router from './routes/index.js';
-import { PORT, VITE_FRONTEND_URL } from './config/env.js';
+import { PORT, FRONTEND_URL } from './config/env.js';
 import { generalLimiter } from './middlewares/rate.middleware.js';
 import { errorHandler } from './middlewares/error.middleware.js';
 
 const app = express();
 app.use(helmet());
-app.use(cors({ origin: VITE_FRONTEND_URL }));
+app.use(cors({ origin: FRONTEND_URL }));
 app.use(generalLimiter);
 app.use(bodyParser.json());
 
