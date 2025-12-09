@@ -9,7 +9,7 @@ export default function Admin() {
     (async () => {
       try {
         const token = localStorage.getItem('sb_token');
-        const res = await fetch(`${import.meta.env.VITE_API}/admin/stats`, {
+        const res = await fetch(`${import.meta.env.VITE_API}/api/admin/stats`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const json = await res.json();
