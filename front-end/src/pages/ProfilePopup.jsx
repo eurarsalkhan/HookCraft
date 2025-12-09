@@ -22,11 +22,20 @@ export default function ProfilePopup({ close }) {
     if (!token) return;
 
     // 2. Call backend profile route
+    // const res = await fetch(`${import.meta.env.VITE_API}/api/users/me`, {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // });
     const res = await fetch(`${import.meta.env.VITE_API}/api/users/me`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    Authorization: `Bearer ${token}`,
+  },
+});
+
 
     if (!res.ok) {
       console.error("Backend error:", res.status);
