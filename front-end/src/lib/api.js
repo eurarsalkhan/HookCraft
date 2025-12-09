@@ -91,14 +91,14 @@ async function request(path, { method = 'GET', body, auth = true } = {}) {
 }
 
 export const Api = {
-  generate: (payload) => request('/generate', { method: 'POST', body: payload }),
-  getMe: () => request('/users/me'),
+  generate: (payload) => request('/api/generate', { method: 'POST', body: payload }),
+  getMe: () => request('/api/users/me'),
 
   createRazorpayOrder: (payload) =>
-    request('/payments/create-order', { method: 'POST', body: payload }),
+    request('/api/payments/create-order', { method: 'POST', body: payload }),
 
   verifyRazorpayPayment: (payload) =>
-    request('/payments/verify', { method: 'POST', body: payload }),
+    request('/api/payments/verify', { method: 'POST', body: payload }),
 
-  getHistory: () => request('/users/me/history')
+  getHistory: () => request('/api/users/me/history')
 };
