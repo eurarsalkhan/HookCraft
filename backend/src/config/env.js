@@ -20,7 +20,7 @@ export const DATABASE_URL = process.env.DATABASE_URL;
 export const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID
 export const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET
 
-export const VITE_FRONTEND_URL = process.env.VITE_FRONTEND_URL || 'http://localhost:5173';
+export const VITE_FRONTEND_URL = process.env.VITE_FRONTEND_URL;
 
 export const RATE_LIMIT_MAX = parseInt(process.env.RATE_LIMIT_MAX || '60', 10);
 export const CACHE_TTL_SECONDS = parseInt(process.env.CACHE_TTL_SECONDS || '86400', 10);
