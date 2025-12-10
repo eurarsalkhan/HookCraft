@@ -621,7 +621,7 @@ export default function Login({ redirectTo = '/generator', onLogin, isFullySigne
 <button
   type="button"
   onClick={signInWithGoogle}
-  className="flex items-center justify-center gap-2 border px-4 py-2 rounded text-black hover:bg-slate-50 w-full"
+  className="flex items-center justify-center gap-2 w-full h-12 px-4 rounded bg-white border border-gray-300 text-black hover:bg-gray-100"
   disabled={oauthLoading}
 >
   {oauthLoading ? 'Redirecting…' : (
