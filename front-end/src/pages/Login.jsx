@@ -320,7 +320,18 @@ export default function Login({ redirectTo = '/generator', onLogin, isFullySigne
       setOauthLoading(false);
     }
   }
+      useEffect(() => {
+  async function finishLogin() {
+    // Google callback will come with tokens in URL hash.
+    const { data: session } = await supabase.auth.getSession();
 
+    if (session?.session) {
+      navigate("/"); // redirect to homepage
+    }
+  }
+
+  finishLogin();
+}, []);
   return (
     <div className="max-w-md mx-auto bg-white p-6 rounded shadow">
       <h3 className="text-xl font-bold mb-3 text-black">Login</h3>
