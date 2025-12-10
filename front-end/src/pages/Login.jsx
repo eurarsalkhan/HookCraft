@@ -594,14 +594,26 @@ export default function Login({ redirectTo = '/generator', onLogin, isFullySigne
         </button>
 
         {/* Google Button */}
-        <button
-          type="button"
-          onClick={signInWithGoogle}
-          className="flex items-center justify-center gap-2 border px-4 py-2 rounded text-black hover:bg-slate-50 w-full"
-          disabled={oauthLoading}
-        >
-          {oauthLoading ? 'Redirecting…' : 'Continue with Google'}
-        </button>
+       <button
+  type="button"
+  onClick={signInWithGoogle}
+  className="flex items-center justify-center gap-3 border px-4 py-2 rounded text-black hover:bg-slate-50 w-full"
+  disabled={oauthLoading}
+>
+  {oauthLoading ? (
+    'Redirecting…'
+  ) : (
+    <>
+      {/* GOOGLE ICON SVG */}
+      <svg width="20" height="20" viewBox="0 0 24 24">
+        <path fill="#EA4335" d="M12 11.5v3.6h5.3c-.2 1.2-1.4 3.4-5.3 3.4-3.2 0-6-2.6-6-6s2.8-6 6-6c1.8 0 3 .8 3.8 1.5l2.6-2.6C17.3 5.1 14.9 4 12 4 7.6 4 4 7.6 4 12s3.6 8 8 8c4.6 0 7.4-3.2 7.4-7.7 0-.5 0-.9-.1-1.3H12z"/>
+      </svg>
+
+      <span>Continue with Google</span>
+    </>
+  )}
+</button>
+
 
         {err && <div className="text-red-600 mt-2">{err}</div>}
       </form>
