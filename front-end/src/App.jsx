@@ -99,6 +99,7 @@ export default function App() {
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/auth/callback" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/privacy" element={<Privacy />} />
