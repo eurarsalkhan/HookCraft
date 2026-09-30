@@ -229,9 +229,9 @@ export default function DevLandingPage() {
       <section id="testimonials" className="max-w-6xl mx-auto px-6 py-12">
         <motion.h3 initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-2xl font-semibold">Loved by creators & product teams</motion.h3>
         <div className="mt-6 grid gap-6 md:grid-cols-3">
-          <Testimonial quote="HookCraft cut our brainstorming time by half. The hooks convert." name="Sana R., Content Lead" />
+          <Testimonial quote="HookCraft cut our brainstorming time by half. The hooks convert." name="Arsalan Khan., Content Lead" />
           <Testimonial quote="A reliable way to Compare ideas quickly — shipped 3 shorts last week." name="Dev Team @HookCraft" />
-          <Testimonial quote="The export tools let us integrate with our CMS in minutes." name="Arsal K., Growth" />
+          <Testimonial quote="The export tools let us integrate with our CMS in minutes." name="Arsalan Khan., Growth" />
         </div>
       </section>
 
