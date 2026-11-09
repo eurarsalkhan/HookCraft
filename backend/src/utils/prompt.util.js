@@ -1,5 +1,5 @@
 export function buildPrompt({ niche, topic, tone, audience, hookType, length, count, genre, conflict, language, reaction, type }) {
-   const lines = [];
+   // const lines = [];
   // lines.push('You are a high-performance social media hook generator.');
   // lines.push(`Produce ${count || 4} unique, scroll-stopping hooks.`);
   // lines.push('Rules:');
